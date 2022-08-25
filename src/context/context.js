@@ -20,9 +20,13 @@ const GithubProvider = ({ children }) => {
     const [error, setError] = useState({ show: false, msg: '' })
 
     useEffect(() => {
+        if (localStorage.getItem('userProfile') === null) {
+            return
+        } else {
         setGithubUser(JSON.parse(localStorage.getItem('userProfile')))
         setFollowers(JSON.parse(localStorage.getItem('followers')));
-        setRepos(JSON.parse(localStorage.getItem('repos')));
+            setRepos(JSON.parse(localStorage.getItem('repos'))); 
+        }
     }, [])
     const searchGithubUser = async (user) => {
         toggleError()
